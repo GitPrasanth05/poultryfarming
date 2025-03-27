@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMMONIA-HISTORY</title>
+    <link href="history.css" , rel="stylesheet">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("index").addEventListener("click", function () {
+                window.location.href = "index.html";
+            });
+        });
+    
+        setInterval(() => {
+            fetch('http://localhost:8000/history')
+                .then(response => response.text())
+                .then(data => {
+                    const serverData = JSON.parse(data);
+                    document.getElementById('serverData').innerText = JSON.stringify(serverData, null, 2);
+                })
+                .catch(error => {
+                    console.error('Error fetching server data:', error);
+                });
+        }, 2000);
+    </script>
+    
+</head>
+<body>
+    <section class="base">
+        <section class="intro">
+            <div class="team">
+                Team : 
+            </div>
+            <div class="teamname">
+                Infinite Innovators
+            </div>
+            <div class="heading">
+                Title : 
+            </div>
+            <div class="brief">
+                Empowering Sustainable Poultry Farming With Smart Emission Management
+            </div>
+        </section>
+        <section class="values">
+            <div class="history">
+                history
+            </div>
+            <div class="serverData" id="serverData">
+
+            </div>
+            <div class="button">
+                <button id="index">Show History</button>
+            </div>
+        </section>
+</body>
+</html>

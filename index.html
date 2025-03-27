@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ammonia Detection</title>
+  <link rel="stylesheet" href="index.css">
+  <link rel="shortcut icon" type="image/x-icon" href="./infinite_innovators-removebg-preview.png"/>
+  <script>
+    document.addEventListener("DOMContentLoaded" , function(){
+      document.getElementById("history").addEventListener("click" , function(){
+        window.location.href = "history.html"
+      })
+    })
+    setInterval(() => {
+      fetch('http://localhost:8000/getServerData')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('ppmvalue').innerText = data;
+          if(data <= 20){
+            document.getElementById('safeorunsafe').innerHTML = "safe"
+            document.getElementById('safeorunsafe').style.color = "green"
+          }else{
+            document.getElementById('safeorunsafe').innerHTML = "unsafe"
+            document.getElementById('safeorunsafe').style.color = "red"            
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching server data:', error);
+        });
+    }, 2000);
+  </script>
+</head>
+<body>
+  <section class="base">
+    <section class="details">
+      <section class="team">
+        <div class="img"></div>
+        <div class="team-text">
+            <span id="title">Team : </span>
+            <span id="text1">Infinite Innovators </span>
+            <span id="title">Title : </span>
+            <span id="text2">Empowering Sustainability Through Poultry Farming With Smart Emission Management</span>
+        </div>
+      </section>
+    </section>
+    <section class="value">
+      <div id="ppm">
+        PPM
+      </div>
+      <div id="ppmvalue">
+
+      </div>
+      <div id="safeorunsafe">
+
+      </div>
+    </section>
+  </section>
+  
+</body>
+</html>
